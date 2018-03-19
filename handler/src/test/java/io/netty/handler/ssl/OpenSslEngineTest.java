@@ -56,6 +56,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeFalse;
 import static org.junit.Assume.assumeTrue;
 
 
@@ -133,6 +134,7 @@ public class OpenSslEngineTest extends SSLEngineTest {
 
     @Test
     public void testNpn() throws Exception {
+        assumeFalse("LibreSSL 2.6.1 removed NPN support", OpenSsl.versionString().startsWith("LibreSSL 2.6."));
         ApplicationProtocolConfig apn = acceptingNegotiator(Protocol.NPN,
                 PREFERRED_APPLICATION_LEVEL_PROTOCOL);
         setupHandlers(apn);
